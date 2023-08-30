@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fasterxml.jackson.annotation.JsonCreator.Mode;
 import com.springboot.example.dto.MemberDTO;
@@ -107,6 +108,19 @@ public class MemberController {
 		session.invalidate();
 		return "index";
 		
+	}
+	
+	@PostMapping("member/email-check")
+	public @ResponseBody String emailCheck(@RequestParam("memberEmail")String memberEmail) {
+		System.out.println("memberEmail" + memberEmail);
+		String checkResult = memberService.emailCheck(memberEmail);
+		return checkResult;
+		
+//		if(checkResult != null) {
+//			return "ok";
+//		}else {
+//			return "no";
+//		}
 	}
 	
 	
